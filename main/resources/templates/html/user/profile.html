@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>My account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+
+            <h4>Profile</h4>
+            <div class="container bootstrap snippet m-4">
+                <form th:method="post" th:action="@{/profile}" th:object="${user}" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-3">
+                            <img th:src="@{${user.photo}}" class="w-50"
+                                 id="image-preview" alt="avatar">
+                            <div class="form-group row mt-1">
+                                <label class="col-2">Role:</label>
+                                <div class="col">
+                                    <input type="hidden" th:field="*{role}">
+                                    <strong th:class="${role == 'ADMIN'} ? text-danger : text-primary" th:text="*{role}"/>
+                                </div>
+                            </div>
+                        </hr><br>
+                        </div>
+
+                        <div class="col-8">
+                            <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+                            <div class="alert alert-danger" role="alert" th:text="${usernameExist}" th:if="${usernameExist}"></div>
+                            <div class="alert alert-danger" role="alert" th:text="${invalidPassword}" th:if="${invalidPassword}"></div>
+
+                            <input type="hidden" th:field="*{id}">
+                            <input type="hidden" th:field="*{active}">
+
+                            <div class="form-group mb-3">
+                                <div class="col-6">
+                                    <label for="username-edit" class="col-form-label">New username</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" th:field="*{username}" name="username"
+                                               id="username-edit">
+                                    </div>
+
+                                    <ul><li th:each="err : ${#fields.errors('username')}" th:text="${err}" class="text-danger"/></ul>
+
+                                </div>
+                            </div>
+
+                            <input type="hidden" th:field="*{photo}">
+                            <div class="form-group mb-3">
+                                <div class="col-6">
+                                    <label for="password-edit" class="col-form-label">New password</label>
+                                    <div class="col">
+                                        <input type="password" class="form-control" th:field="*{password}" name="password"
+                                               id="password-edit">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="col-6">
+                                    <label for="fileImage" class="col-form-label">Upload an avatar</label>
+                                    <div class="col">
+                                        <input type="file" class="form-control-file" id="fileImage" name="fileImage" aria-label="Upload">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <a th:href="@{'/'}" class="btn btn-secondary" role="button">Back to main</a>
+                                <button type="submit" class="btn btn-success pl-3">Update</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#fileImage').change(function() {
+                showImageThumbnail(this);
+            });
+        });
+
+        function showImageThumbnail(fileInput) {
+            file = fileInput.files[0];
+            reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-md navbar-light" style="background-color: #ffbb00;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand p-1" th:href="@{/}">
+        <img src="https://lms.foxminded.com.ua/pluginfile.php/1/core_admin/logo/0x150/1619778190/13718535_1044293615677490_5900458461062519857_n.png"
+             width="30" height="30" class="d-inline-block align-top" alt=""/>
+        <span class="menu-collapsed">University Database</span>
+    </a>
+
+    <div class="dropdown d-flex ms-md-auto">
+        <a href="#" class="align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+            <strong th:inline="text">Welcome, [[${#httpServletRequest.remoteUser}]]</strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser" style="">
+            <li><a class="dropdown-item bi bi-house-door" th:href="@{/profile}"> My profile</a></li>
+            <li><a sec:authorize="hasAuthority('ADMIN')" th:replace="wrapper/navbar :: users-link-active"> Users</a></li>
+            <li><hr class="dropdown-divider"></hr></li>
+            <form th:action="@{/logout}" method="post">
+                <li><input class="dropdown-item text-danger" type="submit" value="Sign Out"/></li>
+            </form>
+        </ul>
+    </div>
+</nav>
+
+<a th:fragment="users-link-active" class="dropdown-item bi bi-at" th:href="@{/users}"> Users</a>

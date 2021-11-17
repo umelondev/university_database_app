@@ -1,0 +1,48 @@
+<div th:fragment="sidebar" id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+    <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+    <!-- Bootstrap List Group -->
+    <ul class="list-group">
+        <!-- Separator with title -->
+        <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+            <small>MODELS</small>
+        </li>
+        <!-- /END Separator -->
+        <!-- Models-->
+        <a th:href="@{/classrooms}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-door-open"></span>
+                <span class="menu-collapsed">⠀⠀Classrooms</span>
+            </div>
+        </a>
+        <a th:href="@{/groups}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-megaphone"></span>
+                <span class="menu-collapsed">⠀⠀Groups</span>
+            </div>
+        </a>
+        <a th:href="@{/schedules}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-calendar-week"></span>
+                <span class="menu-collapsed">⠀⠀Schedule</span>
+            </div>
+        </a>
+        <a th:href="@{/students}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-people"></span>
+                <span class="menu-collapsed">⠀⠀Students</span>
+            </div>
+        </a>
+        <a th:href="@{/subjects}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-book"></span>
+                <span class="menu-collapsed">⠀⠀Subjects</span>
+            </div>
+        </a>
+        <a th:href="@{/teachers}" class="bg-dark list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-start align-items-center">
+                <span class="bi bi-person"></span>
+                <span class="menu-collapsed">⠀⠀Teachers</span>
+            </div>
+        </a>
+    </ul><!-- List Group END-->
+</div>

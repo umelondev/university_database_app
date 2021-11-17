@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New group page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4>New group</h4>
+
+            <div class="row mt-5 ml-0">
+                <form th:method="post" th:action="@{/groups/add}" th:object="${group}">
+
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label for="name-input" class="col-form-label">Name</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="name-input">
+
+                            <ul><li th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger"/></ul>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a th:href="@{/groups}" class="btn btn-secondary" role="button">Cancel</a>
+                        <button type="submit" class="btn btn-success pl-3">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

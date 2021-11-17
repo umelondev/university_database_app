@@ -1,0 +1,57 @@
+<div th:fragment="add-classroom-active-button" class="form-group">
+    <div class="col-2">
+        <a th:href="@{/classrooms/add}" class="btn btn-warning" role="button">
+            <span class="bi bi-plus-lg"> Add new</span>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="add-group-active-button" class="form-group">
+    <div class="col-2">
+        <a th:href="@{/groups/add}" class="btn btn-warning" role="button">
+            <span class="bi bi-plus-lg"> Add new</span>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="add-subject-to-group-button" class="form-group mt-5">
+    <div class="col-2">
+        <a th:href="@{'/groups/' +${id}+ '/add-subject'}" class="btn btn-warning" role="button">
+            <span class="bi bi-plus-lg"> Add subject</span>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="add-schedule-active-button" class="col-3">
+    <a th:href="@{/schedules/add}" class="btn btn-warning" role="button">
+        <span class="bi bi-plus-lg"> Add new</span>
+    </a>
+</div>
+
+<div th:fragment="add-student-active-button" class="col-3">
+    <a th:href="@{/students/add}" class="btn btn-warning" role="button">
+        <span class="bi bi-plus-lg"> Add new</span>
+    </a>
+</div>
+
+<div th:fragment="add-subject-active-button" class="col-3">
+    <a th:href="@{/subjects/add}" class="btn btn-warning" role="button">
+        <span class="bi bi-plus-lg"> Add new</span>
+    </a>
+</div>
+
+<div th:fragment="add-teacher-active-button" class="col-3">
+    <a th:href="@{/teachers/add}" class="btn btn-warning" role="button">
+        <span class="bi bi-plus-lg"> Add new</span>
+    </a>
+</div>
+
+<div th:fragment="action-with-db" class="row">
+    <div class="btn-group-vertical col-2">
+        <form th:action="@{/generator}" method="post">
+            <button class="btn btn-info" type="submit">
+                <span class="bi bi-cloud-plus-fill"> Generate data</span>
+            </button>
+        </form>
+    </div>
+</div>

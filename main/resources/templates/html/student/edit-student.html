@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit student page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4 th:text="'Edit: @student' +${id}"/>
+
+            <div class="row mt-5 ml-0">
+                <form th:method="post" th:action="@{'/students/' +${id}+ '/edit'}" th:object="${student}">
+
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label for="fname-edit" class="col-form-label">FirstName</label>
+                            <input type="text" th:field="*{firstName}" class="form-control" id="fname-edit"></input>
+
+                            <ul><li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="text-danger"/></ul>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label for="lname-edit" class="col-form-label">LastName</label>
+                            <input type="text" th:field="*{lastName}" class="form-control" id="lname-edit"></input>
+
+                            <ul><li th:each="err : ${#fields.errors('lastName')}" th:text="${err}" class="text-danger"/></ul>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="col-4">
+                            <label for="group-edit">Group</label>
+                            <div class="col mt-2">
+                                <select id="group-edit" class="js-example-basic-single" th:field="*{groupId}" style="width: 50%;">
+                                    <option selected th:value="${student.get().getGroupId()}"></option>
+                                    <option th:each="i : ${groupList}" th:value="${i.getId()}" th:text="${i.getName()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <ul><li th:each="err : ${#fields.errors('groupId')}" th:text="${err}" class="text-danger"/></ul>
+                    </div>
+
+                    <div class="mt-5">
+                        <a th:href="@{'/students/' +${id}}" class="btn btn-secondary" role="button">Cancel</a>
+                        <button type="submit" class="btn btn-success pl-3">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="wrapper/scripts-block :: scripts"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+</body>
+</html>

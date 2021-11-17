@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add subject to group page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4 th:text="'Add subject to: @group' +${id}"/>
+
+            <div class="row mt-5 ml-0">
+                <form th:action="@{'/groups/' +${id}+ '/add-subject/'}" method="post">
+
+                    <div class="form-group">
+                        <div class="col-4">
+                            <div class="col">
+                                <select class="js-example-basic-single" name="subjectId" style="width: 50%;">
+                                    <option value="">Search subject</option>
+                                    <option th:each="i : ${subjectList}" th:value="${i.getId()}" th:text="${i.getName()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a th:href="@{'/groups/' +${id}}" class="btn btn-secondary" role="button">Cancel</a>
+                        <button type="submit" class="btn btn-success pl-3">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="wrapper/scripts-block :: scripts"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+</body>
+</html>

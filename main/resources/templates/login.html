@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+
+    <section class="vh-100" style="background-color: #eb8c34">
+        <div class="container py-4 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-4 text-center">
+                            <img class="img-fluid d-block mx-auto mb-4"
+                                 src="https://lms.foxminded.com.ua/pluginfile.php/1/core_admin/logo/0x200/1631533031/13718535_1044293615677490_5900458461062519857_n.png" alt="">
+
+                            <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+                            <div class="alert alert-danger" role="alert" th:text="${regError}" th:if="${regError}"></div>
+
+                            <form th:action="@{/login}" method="post">
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                                    <label for="username">Username</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                    <label for="password">Password</label>
+                                </div>
+
+                                <div th:if="${param.error}" class="text-danger mb-4">incorrect username or password</div>
+
+                                <div class="d-grid gap-2 col-12 mx-auto">
+                                    <button class="btn btn-warning" type="submit">Sign in</button>
+                                </div>
+                            </form>
+
+                            <hr class="my-4">
+
+                            <p class="gl-mt-3">
+                                Don't have an account yet?
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Register now</a>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create new account</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form th:action="@{/registration}" method="post">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="username-reg" name="username" placeholder="Username">
+                                                    <label for="username-reg">Username</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="password" class="form-control" id="password-reg" name="password" placeholder="Password">
+                                                    <label for="password-reg">Password</label>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <div class="d-grid gap-2 col-6 mx-auto">
+                                                        <button class="btn btn-success" type="submit">Sign Up</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

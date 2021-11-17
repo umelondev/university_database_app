@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New schedule page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4>New schedule</h4>
+
+            <div class="row mt-5 ml-0">
+                <form th:method="post" th:action="@{/schedules/add}" th:object="${schedule}">
+
+                    <div class="form-group">
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label for="date-input" class="col-form-label">Date</label>
+                                <div class="col-10">
+                                    <input class="form-control" th:field="*{calendarDate}" type="date" value="2011-08-19"
+                                           id="date-input" contenteditable="true" spellcheckker="false">
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <label for="time-input" class="col-form-label">Time</label>
+                                <div class="col-10">
+                                    <input class="form-control" th:field="*{orderTime}" type="time" value="08:00:00"
+                                           id="time-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label for="group-input" class="col-form-label">Group</label>
+                                <div class="col">
+                                    <select id="group-input" class="js-example-basic-single" th:field="*{groupId}" style="width: 60%;">
+                                        <option value="">Search group</option>
+                                        <option th:each="i : ${groupList}" th:value="${i.getId()}" th:text="${i.getName()}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <ul><li th:each="err : ${#fields.errors('groupId')}" th:text="${err}" class="text-danger"/></ul>
+
+                            </div>
+                            <div class="col-4">
+                                <label for="subject-input" class="col-form-label">Subject</label>
+                                <div class="col">
+                                    <select id="subject-input" class="js-example-basic-single" th:field="*{subjectId}" style="width: 60%;">
+                                        <option value="">Search subject</option>
+                                        <option th:each="i : ${subjectList}" th:value="${i.getId()}" th:text="${i.getName()}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <ul><li th:each="err : ${#fields.errors('subjectId')}" th:text="${err}" class="text-danger"/></ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label for="teacher-input" class="col-form-label">Teacher</label>
+                                <div class="col">
+                                    <select id="teacher-input" class="js-example-basic-single" th:field="*{teacherId}" style="width: 60%;">
+                                        <option value="">Search teacher</option>
+                                        <option th:each="i : ${teacherList}" th:value="${i.getId()}" th:text="${i.getFullName()}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <ul><li th:each="err : ${#fields.errors('teacherId')}" th:text="${err}" class="text-danger"/></ul>
+
+                            </div>
+                            <div class="col-4">
+                                <label for="classroom-input" class="col-form-label">Classroom</label>
+                                <div class="col">
+                                    <select id="classroom-input" class="js-example-basic-single" th:field="*{classroomId}" style="width: 60%;">
+                                        <option value="">Search classroom</option>
+                                        <option th:each="i : ${classroomList}" th:value="${i.getId()}" th:text="${i.getName()}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <ul><li th:each="err : ${#fields.errors('classroomId')}" th:text="${err}" class="text-danger"/></ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a th:href="@{/schedules}" class="btn btn-secondary" role="button">Cancel</a>
+                        <button type="submit" class="btn btn-success pl-3">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+</body>
+</html>

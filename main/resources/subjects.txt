@@ -1,0 +1,10 @@
+Literary criticism_Science that studies fiction as a phenomenon of human culture.
+History_Learn about the aspects of history.
+Sociology_Gain a deeper understanding of social and cultural issues.
+Science_Make your science education a little more interesting with these courses.
+Technology_All about modern technology on the planet.
+Philosophy_To help you think deeply about philosophical and religious issues.
+Music_Explore music from some different perspectives in these courses.
+Visual Arts_From videogames to horror films, these courses help college students analyze visual culture.
+Physical Education_These courses help students all over the nation stay in shape and get active.
+Popular Culture_Focusing on popular culture phenomena and icons.

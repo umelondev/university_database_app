@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>500 page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+<nav th:replace="wrapper/navbar :: navbar"></nav>
+
+<div class="row" id="body-row">
+
+    <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+    <div class="col m-3">
+        <h4>Something wrong..</h4>
+        <p class="col mt-4" th:text="${message}"/>
+        <a th:href="${link}" th:text="${button}" class="text-reset"/>
+    </div>
+
+</div>
+
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

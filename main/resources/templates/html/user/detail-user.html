@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'User id=' + ${id} +' page'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+<nav th:replace="wrapper/navbar :: navbar"></nav>
+
+<div class="row" id="body-row">
+
+    <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+    <div class="col m-3">
+        <h4 th:text="'Details: @user' +${id}"/>
+
+        <div class="row mt-5 ml-0">
+                <div class="form-group row">
+                    <label class="col">Username:</label>
+                    <div class="col-10">
+                        <p class="form-control-static" th:text="${username}"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col">Role:</label>
+                    <div class="col-10">
+                        <p class="form-control-static" th:text="${role}"/>
+                    </div>
+                </div>
+
+
+            <div class="mt-5">
+                <a th:href="@{/users}" class="btn btn-secondary" role="button">Back to list</a>
+                <a th:href="@{'/users/' +${id}+ '/edit'}" class="btn btn-warning pl-3" role="button">Edit role</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

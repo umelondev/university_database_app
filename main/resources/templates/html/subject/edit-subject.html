@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit subject page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4 th:text="'Edit: @subject' +${id}"/>
+
+            <div class="row mt-5 ml-0">
+                <form th:method="post" th:action="@{'/subjects/' +${id}+ '/edit'}" th:object="${subject}">
+
+                    <div class="form-group">
+                        <div class="col-4">
+                            <label for="name-edit" class="col-form-label">Name</label>
+                            <div class="col-10">
+                                <input type="text" th:field="*{name}" class="form-control" id="name-edit">
+                            </div>
+
+                            <ul><li th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger"/></ul>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="col-4">
+                            <label for="description-edit" class="col-form-label">Description</label>
+                            <div class="col-10">
+                                <textarea th:field="*{description}" class="form-control" id="description-edit"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <a th:href="@{'/subjects/' +${id}}" class="btn btn-secondary" role="button">Cancel</a>
+                        <button type="submit" class="btn btn-success pl-3">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:insert="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

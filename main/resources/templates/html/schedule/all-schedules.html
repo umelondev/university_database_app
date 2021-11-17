@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Schedule list page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4>Schedule list</h4>
+
+            <div class="row mt-5 ml-0">
+                <div class="form-group">
+                    <div class="row g-2">
+                        <div sec:authorize="hasAuthority('ADMIN')"
+                             th:replace="wrapper/view-by-role :: add-schedule-active-button"></div>
+                        <div class="col-2">
+                            <button class="btn btn-warning dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Search..</button>
+                            <ul class="dropdown-menu dropdown-menu-end" style="background-color: #E5E7E9; width: 350px;">
+                                <li>
+                                    <form class="d-flex" method="post" th:action="@{/schedules/search/date}">
+                                        <div class="input-group mb-3">
+                                            <input type="date" class="form-control" name="date" required="required"/>
+                                            <button class="btn btn-success" type="submit">by date</button>
+                                        </div>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form class="d-flex" method="post" th:action="@{/schedules/search/by-group}">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="groupId" required="required"/>
+                                            <button class="btn btn-success" type="submit">by group_id</button>
+                                        </div>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form class="d-flex" method="post" th:action="@{/schedules/search/by-teacher}">
+                                        <div class="input-group mb-3">
+                                            <input type="number" class="form-control" name="teacherId" required="required"/>
+                                            <button class="btn btn-success" type="submit">by teacher_id</button>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 m-1">
+                <table class="table table-hover" id="schedules-table">
+                    <thead class="table-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Teacher</th>
+                        <th scope="col">Classroom</th>
+                        <th scope="col" class="text-muted">#Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr itemscope="row" th:each="el: ${schedules}">
+                        <td th:text="${el.id}"/>
+                        <td th:text="${el.calendarDate}"/>
+                        <td th:text="${el.orderTime}"/>
+                        <td th:text="${el.group}"/>
+                        <td th:text="${el.subject}"/>
+                        <td th:text="${el.teacher}"/>
+                        <td th:text="${el.classroom}"/>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="actions buttons">
+                                <a th:href="@{'/schedules/' + ${el.id}}" class="btn btn-info" role="button">
+                                    <span class="bi bi-info-lg"></span>
+                                </a>
+                                <form th:action="@{'/schedules/' +${el.id}+ '/delete'}" method="post">
+                                    <button class="btn btn-danger" type="submit">
+                                        <span class="bi bi-trash-fill"></span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

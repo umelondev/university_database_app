@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="row" id="body-row">
+        <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+        <div class="col m-3">
+            <h4>Dashboard</h4>
+            <div class="row m-4">
+                <div class="col-md-4">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/clss-photo.jpg}" alt="clss-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="clss-card">
+                                    <h4 class="card-text" th:text="${classrooms_count}"/>
+                                    <h6 class="card-text">classrooms</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/grp-photo.jpg}" alt="grp-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="grp-card">
+                                    <h4 class="card-text" th:text="${groups_count}"/>
+                                    <h6 class="card-text">groups</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/sdl-photo.jpg}" alt="sdl-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="sdl-card">
+                                    <h4 class="card-text" th:text="${schedules_count}"/>
+                                    <h6 class="card-text">schedules</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col-md-4">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/stdt-photo.jpg}" alt="stdt-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="stdt-card">
+                                    <h4 class="card-text" th:text="${students_count}"/>
+                                    <h6 class="card-text">students</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/sbjct-photo.jpg}" alt="sbjct-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="sbjct-card">
+                                    <h4 class="card-text" th:text="${subjects_count}"/>
+                                    <h6 class="card-text">subjects</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md">
+                    <div class="card" style="width: 270px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <img class="card-img" th:src="@{/images/tchr-photo.jpg}" alt="tchr-photo"/>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body" id="tchr-card">
+                                    <h4 class="card-text" th:text="${teachers_count}"/>
+                                    <h6 class="card-text">teachers</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div sec:authorize="hasAuthority('ADMIN')" th:replace="wrapper/view-by-role :: action-with-db"></div>
+
+        </div>
+</div>
+
+    <div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

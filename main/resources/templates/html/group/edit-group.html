@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Edit group page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+  <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+  <div class="row" id="body-row">
+
+    <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+    <div class="col m-3">
+      <h4 th:text="'Edit: @group' +${id}"/>
+
+      <div class="row mt-5 ml-0">
+        <form th:method="post" th:action="@{'/groups/' +${id}+ '/edit'}" th:object="${group}">
+
+          <div class="form-group">
+            <div class="col-4">
+              <label for="name-edit" class="col-form-label">Name</label>
+              <input type="text" th:field="*{name}" class="form-control" id="name-edit"></input>
+
+              <ul><li th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger"/></ul>
+
+            </div>
+          </div>
+
+          <div class="form-group row mt-5 m-0">
+            <table class="table table-hover">
+              <thead class="table-light">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col" class="text-muted">#Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr itemscope="row" th:each="el: ${subjects}">
+                <td th:text="${el.id}"/>
+                <td th:text="${el.name}"/>
+                <td th:text="${el.description}"/>
+                <td>
+                  <div class="btn-group" role="group" aria-label="actions buttons">
+                    <form th:action="@{'/groups/' +${id}+ '/edit/remove-subject/' +${el.id}}" method="post">
+                      <button class="btn btn-danger" type="submit">
+                        <span class="bi bi-trash-fill"></span>
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-5">
+            <a th:href="@{'/groups/' +${id}}" class="btn btn-secondary" role="button">Cancel</a>
+            <button type="submit" class="btn btn-success pl-3">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div th:insert="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>

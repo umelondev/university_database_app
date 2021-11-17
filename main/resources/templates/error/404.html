@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>404 page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+    <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+    <div class="text-center container col mt-5">
+        <img th:src="@{/images/fox-head.png}" class="rounded" alt="fox-head"/>
+        <h4>Sorry, this page isn't available.</h4>
+        <p>The link you followed may be broken, or the page may have been removed.</p>
+    </div>
+</body>
+</html>

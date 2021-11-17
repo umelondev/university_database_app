@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="'Student id=' + ${id} +' page'"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <div th:replace="wrapper/scripts-block :: css"></div>
+</head>
+<body>
+  <nav th:replace="wrapper/navbar :: navbar"></nav>
+
+  <div class="row" id="body-row">
+
+    <div th:replace="wrapper/sidebar :: sidebar"></div>
+
+    <div class="col m-3">
+      <h4 th:text="'Details: @student' +${id}"/>
+
+      <div class="row mt-5 ml-0">
+        <form>
+          <div class="form-group row">
+            <label class="col">FirstName:</label>
+            <div class="col-10">
+              <p class="form-control-static" th:text="${firstName}"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col">LastName:</label>
+            <div class="col-10">
+              <p class="form-control-static" th:text="${lastName}"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col">Group Id:</label>
+            <div class="col-10">
+              <p class="form-control-static" th:text="${groupId}"/>
+            </div>
+          </div>
+        </form>
+
+        <div class="mt-5">
+          <a th:href="@{/students}" class="btn btn-secondary" role="button">Back to list</a>
+          <a th:href="@{'/students/' +${id}+ '/edit'}" class="btn btn-warning pl-3" role="button">Edit</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div th:replace="wrapper/scripts-block :: scripts"></div>
+</body>
+</html>
