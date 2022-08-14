@@ -172,21 +172,6 @@ public class UserController {
         redirAttrs.addFlashAttribute("success", "Profile successfully updated!");
 
         return "redirect:/profile";
-
-//        if (userService.isValidUsername(user, username)) {
-//            if (userService.isValidPassword(user, newPassword)) {
-//
-//                userService.uploadPhoto(user, fileImage);
-//
-//                userService.save(user);
-//                updateSession(user);
-//                redirAttrs.addFlashAttribute("success", "Profile successfully updated!");
-//
-//            } else redirAttrs.addFlashAttribute("invalidPassword", "invalid password!");
-//        } else redirAttrs.addFlashAttribute("usernameExist", String.format("username \"%s\" is already in use!",
-//                user.getUsername()));
-//
-//        return "redirect:/profile";
     }
 
     private void updateSession(User user) {
